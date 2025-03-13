@@ -55,6 +55,3 @@ def main_loop():
                 print("Error publishing event to Kafka:", e)
         # Adjust sleep time to simulate bursty behavior
         time.sleep(random.uniform(0.1, 0.5))
-
-if __name__ == "__main__":
-    main_loop()

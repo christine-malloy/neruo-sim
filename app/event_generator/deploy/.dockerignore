@@ -1,0 +1,49 @@
+LICENCE
+README.md
+
+# Python files #
+################
+# setup.py working directory
+build
+# sphinx build directory
+doc/_build
+# setup.py dist directory
+dist
+# Egg metadata
+*.egg-info
+.eggs
+.pypirc
+# type checkers
+pandas/py.typed
+
+# pyenv
+.python-version
+
+# tox testing tool
+.tox
+# rope
+.ropeproject
+# wheel files
+*.whl
+**/wheelhouse/*
+pip-wheel-metadata
+# coverage
+.coverage
+coverage.xml
+coverage_html_report
+.mypy_cache
+*.pytest_cache
+.ruff_cache
+# hypothesis test database
+.hypothesis/
+__pycache__
+# pytest-monkeytype
+monkeytype.sqlite3
+# meson editable install folder
+.mesonpy
+
+**/venv
+
+deploy
+
+dist
