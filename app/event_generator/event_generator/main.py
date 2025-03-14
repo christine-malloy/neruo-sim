@@ -5,17 +5,24 @@ import json
 import sys
 import openai
 from kafka import KafkaProducer
+from kafka.errors import NoBrokersAvailable
 
 # Load environment variables
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "localhost:9092")
 TOPIC = os.environ.get("KAFKA_TOPIC", "events")
 
-# Initialize Kafka producer with JSON serialization.
-producer = KafkaProducer(
-    bootstrap_servers=[KAFKA_BROKER],
-    value_serializer=lambda v: json.dumps(v).encode("utf-8")
-)
+def initialize_kafka():
+    try:
+        # Initialize Kafka producer with JSON serialization.
+        producer = KafkaProducer(
+            bootstrap_servers=[KAFKA_BROKER],
+            value_serializer=lambda v: json.dumps(v).encode("utf-8")
+        )
+        return producer
+    except NoBrokersAvailable as e:
+        print("Error initializing kafka:", e)
+        return None
 
 def generate_event():
     """
@@ -46,7 +53,9 @@ def main_loop():
     Randomized sleep simulates bursty load.
     """
     print("Event generator started.")
-    sys.exit(0)
+    producer = initialize_kafka()
+    if not producer:
+        raise Exception("Kafka producer not initialized: exiting.")
     while True:
         event = generate_event()
         if event:
