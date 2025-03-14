@@ -2,6 +2,7 @@ import os
 import time
 import random
 import json
+import sys
 import openai
 from kafka import KafkaProducer
 
@@ -45,6 +46,7 @@ def main_loop():
     Randomized sleep simulates bursty load.
     """
     print("Event generator started.")
+    sys.exit(0)
     while True:
         event = generate_event()
         if event:

@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'event_generator = event_generator.main:main',
+            'event_generator = event_generator.main:main_loop',
         ],
     },
     classifiers=[
